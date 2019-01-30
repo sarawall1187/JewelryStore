@@ -8,7 +8,7 @@ class JewelryStore::CLI
       puts "Are you shopping for a ring, earrings, or necklace? Choose 'ring', 'earrings', or 'necklace'"
       input = gets.strip
     elsif input == 'repair'
-     puts "Our Jeweler is on site, we can have this ready in #{time.now + 7}"
+     puts "Our Jeweler is on site, we can have this ready in #{Time.now + 7}"
    else 
      puts "I did not understand your input, please choose 'shop' or 'repair'"
    end
