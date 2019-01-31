@@ -1,6 +1,6 @@
 class JewelryStore::Jewelry_Piece
   
-  attr_accessor :type, :description 
+  attr_accessor :type, :description
   
   @@all_rings=[]
   @@all_necklaces=[]
@@ -13,13 +13,21 @@ class JewelryStore::Jewelry_Piece
        @@all_earrings << self
      when "Necklaces"
        @@all_necklaces << self 
-     when "Rings"
+     when "Ring"
        @@all_rings << self 
      end
    end
    
-   def self.all
-     @@all
+   def self.all_earrings
+     @@all_earrings
+   end 
+   
+     def self.all_necklaces
+     @@all_necklaces 
+   end 
+   
+     def self.all_rings
+     @@all_rings
    end 
    
    def save

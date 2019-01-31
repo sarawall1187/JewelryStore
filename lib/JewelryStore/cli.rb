@@ -21,7 +21,12 @@ class JewelryStore::CLI
      when 'ring' || 'rings'
        url = "https://www.jewelry.com/rings"
        JewelryStore::Scraper.scrape_jewelry(url, "Ring")
-        list_jewelry
+        list_rings
+        #seperate method 
+        # input = gets.strip 
+        #take input to return that pieces info 
+        #look at @@all_rings and use the number to return the right ring 
+        #pass that ring to the scraper 
       puts "I will have your info about rings shortly."
      when 'earrings' || 'earring'
        url = "https://www.jewelry.com/earrings"
@@ -54,8 +59,8 @@ class JewelryStore::CLI
      end
    end
    
-   def list_jewelry
-     JewelryStore::Jewelry_Piece.all.each.with_index(1) do |type, i|
+   def list_rings
+     JewelryStore::Jewelry_Piece.all_rings.each.with_index(1) do |type, i|
      puts "#{i}. #{type.description}"
     end
    end
