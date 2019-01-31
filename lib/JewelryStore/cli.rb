@@ -18,6 +18,8 @@ class JewelryStore::CLI
     puts "Are you shopping for a ring, earrings, or necklace? Choose 'ring', 'earrings', or 'necklace'"
     input = gets.strip
      if input == 'ring'
+       url = "https://www.jewelry.com/rings"
+       JewelryStore::Scraper.scrape_jewelry(url)
       puts "I will have your info about rings shortly."
      elsif input == 'earrings'
       puts "I will have your info about earrings shortly."
