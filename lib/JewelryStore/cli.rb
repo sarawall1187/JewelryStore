@@ -17,13 +17,17 @@ class JewelryStore::CLI
   def shop_menu
     puts "Are you shopping for a ring, earrings, or necklace? Choose 'ring', 'earrings', or 'necklace'"
     input = gets.strip
-     if input == 'ring'
+     if input == 'ring' || 'rings'
        url = "https://www.jewelry.com/rings"
        JewelryStore::Scraper.scrape_jewelry(url)
       puts "I will have your info about rings shortly."
      elsif input == 'earrings'
+       url = "https://www.jewelry.com/earrings"
+       JewelryStore::Scraper.scrape_jewelry(url)
       puts "I will have your info about earrings shortly."
      elsif input == 'necklace'
+       url = "https://www.jewelry.com/necklaces"
+       JewelryStore::Scraper.scrape_jewelry(url)
       puts "I will have your info about necklaces shortly."
      else 
        puts "I did not understand your input."
