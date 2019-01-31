@@ -5,11 +5,12 @@
 
 class JewelryStore::Scraper
   
-  def self.scrape_jewelry(url)
+  def self.scrape_jewelry(url, type)
     doc = Nokogiri::HTML(open(url))
     doc.css("div.pl-product-info").each.with_index(1) do |item, i|
-    description = item.css("h5.pl-description").text
-   puts "#{i}. #{description}"
+    jewelry_piece = JewelryStore::Jewelry_Piece.new(type)
+    jewelry_piece.description = item.css("h5.pl-description").text
+  
    #binding.pry
    end
   end
