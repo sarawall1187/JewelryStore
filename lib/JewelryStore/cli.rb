@@ -17,18 +17,21 @@ class JewelryStore::CLI
   def shop_menu
     puts "Are you shopping for a ring, earrings, or necklace? Choose 'ring', 'earrings', or 'necklace'"
     input = gets.strip
-     if input == 'ring' || input == 'rings'
+    case input
+     when 'ring' || 'rings'
        url = "https://www.jewelry.com/rings"
        JewelryStore::Scraper.scrape_jewelry(url, "Ring")
         list_jewelry
       puts "I will have your info about rings shortly."
-     elsif input == 'earrings'
+     when 'earrings' || 'earring'
        url = "https://www.jewelry.com/earrings"
        JewelryStore::Scraper.scrape_jewelry(url, "Earrings")
+       list_jewelry
       puts "I will have your info about earrings shortly."
-     elsif input == 'necklace'
+     when 'necklace' || 'necklaces'
        url = "https://www.jewelry.com/necklaces"
        JewelryStore::Scraper.scrape_jewelry(url, "Necklaces")
+       list_jewelry
       puts "I will have your info about necklaces shortly."
      else 
        puts "I did not understand your input."
@@ -54,6 +57,7 @@ class JewelryStore::CLI
    def list_jewelry
      JewelryStore::Jewelry_Piece.all.each.with_index(1) do |type, i|
      puts "#{i}. #{type.description}"
+    end
    end
-   end
+   
 end
