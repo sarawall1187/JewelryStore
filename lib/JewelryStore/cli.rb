@@ -82,7 +82,8 @@ class JewelryStore::CLI
       max_choice = JewelryStore::Jewelry_Piece.all_rings.length
       if input.between?(1, max_choice)
         ring_choice = JewelryStore::Jewelry_Piece.all_rings[input - 1]
-        # display_rings(ring_choice)
+        JewelryStore::Scraper.scrape_more_info(ring_choice)
+        # display_jewelry(ring_choice) puts out ring_choice.more_info & .price
       else
         puts "I did not understand your input."
         list_rings

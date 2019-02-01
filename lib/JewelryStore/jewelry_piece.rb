@@ -1,12 +1,12 @@
 class JewelryStore::Jewelry_Piece
   
-  attr_accessor :type, :description, :url
+  attr_accessor :type, :description, :url, :price, :more_info
   
   @@all_rings=[]
   @@all_necklaces=[]
   @@all_earrings=[]
   
-   def initialize(type, url)
+   def initialize(type)
      @type = type
      case type 
        when "Earrings"
@@ -16,7 +16,7 @@ class JewelryStore::Jewelry_Piece
        when "Ring"
          @@all_rings << self 
      end
-     @url = "https://www.jewelry.com" + url
+     
    end
    
    def self.all_earrings
