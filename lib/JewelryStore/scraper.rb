@@ -17,11 +17,10 @@ class JewelryStore::Scraper
   end
   
   def self.scrape_more_info(jewelry_piece)
-    # binding.pry
     doc = Nokogiri::HTML(open(jewelry_piece.url)) 
-    jewelry_piece.price = "scrape_more_info"
-    jewelry_piece.more_info = "scrape"
-     
+    jewelry_piece.price = doc.css("span#product-price").text.strip
+    jewelry_piece.more_info = doc.css("div.product-desc").text
+      # binding.pry
   end
 
 end

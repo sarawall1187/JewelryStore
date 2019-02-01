@@ -25,17 +25,16 @@ class JewelryStore::CLI
        JewelryStore::Scraper.scrape_jewelry(url, "Ring")
         list_rings
         ring_choice
-      # puts "I will have your info about rings shortly."
      when 'earrings', 'earring'
        url = "https://www.jewelry.com/earrings"
        JewelryStore::Scraper.scrape_jewelry(url, "Earrings")
        list_earrings
-      puts "I will have your info about earrings shortly."
+       earring_choice
      when 'necklace', 'necklaces'
        url = "https://www.jewelry.com/necklaces"
        JewelryStore::Scraper.scrape_jewelry(url, "Necklaces")
        list_necklaces
-      puts "I will have your info about necklaces shortly."
+       necklace_choice
      else 
        puts "I did not understand your input."
        shop_menu
@@ -77,18 +76,56 @@ class JewelryStore::CLI
    
   def ring_choice
     puts "Would you like more information?"
-    puts "Choose a ring by entering its number."
+    puts "Select a ring by entering its number."
       input = gets.strip.to_i 
       max_choice = JewelryStore::Jewelry_Piece.all_rings.length
       if input.between?(1, max_choice)
         ring_choice = JewelryStore::Jewelry_Piece.all_rings[input - 1]
         JewelryStore::Scraper.scrape_more_info(ring_choice)
-        # display_jewelry(ring_choice) puts out ring_choice.more_info & .price
+        display_jewelry(ring_choice) 
       else
         puts "I did not understand your input."
         list_rings
         ring_choice
       end
     end
-   
+    
+     def earring_choice
+      puts "Would you like more information?"
+      puts "Select an earring by entering its number."
+      input = gets.strip.to_i 
+      max_choice = JewelryStore::Jewelry_Piece.all_earrings.length
+      if input.between?(1, max_choice)
+        earring_choice = JewelryStore::Jewelry_Piece.all_earrings[input - 1]
+        JewelryStore::Scraper.scrape_more_info(earring_choice)
+        display_jewelry(earring_choice) 
+      else
+        puts "I did not understand your input."
+        list_earrings
+        earring_choice
+      end
+    end
+    
+    def necklace_choice
+    puts "Would you like more information?"
+    puts "Select a necklace by entering its number."
+      input = gets.strip.to_i 
+      max_choice = JewelryStore::Jewelry_Piece.all_necklaces.length
+      if input.between?(1, max_choice)
+        necklace_choice = JewelryStore::Jewelry_Piece.all_necklaces[input - 1]
+        JewelryStore::Scraper.scrape_more_info(necklace_choice)
+        display_jewelry(necklace_choice) 
+      else
+        puts "I did not understand your input."
+        list_necklaces
+        necklace_choice
+      end
+    end
+    
+    def display_jewelry(jewelry_item)
+      JewelryStore::Scraper.scrape_more_info(jewelry_item)
+      puts "Here is more information about your selection:"
+       puts jewelry_item.more_info 
+       puts jewelry_item.price
+    end
 end
