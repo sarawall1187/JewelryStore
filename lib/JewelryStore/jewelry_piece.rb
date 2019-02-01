@@ -1,6 +1,6 @@
 class JewelryStore::Jewelry_Piece
   
-  attr_accessor :type, :description
+  attr_accessor :type, :description, :url
   
   @@all_rings=[]
   @@all_necklaces=[]

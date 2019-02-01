@@ -10,9 +10,9 @@ class JewelryStore::Scraper
     doc.css("div.pl-product-info").each.with_index(1) do |item, i|
     jewelry_piece = JewelryStore::Jewelry_Piece.new(type)
     jewelry_piece.description = item.css("h5.pl-description").text
-    # jewelry_piece.url = "#scrape"
-   #binding.pry
-   end
+  #   jewelry_piece.url = item.css("a").attr("href")
+  #   binding.pry
+  end
   end
   
   # def self.scrape_more_info(jewelry_piece)
