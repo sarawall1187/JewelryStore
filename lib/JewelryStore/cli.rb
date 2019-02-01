@@ -25,16 +25,19 @@ class JewelryStore::CLI
        JewelryStore::Scraper.scrape_jewelry(url, "Ring")
         list_rings
         ring_choice
+        new_choice_menu
      when 'earrings', 'earring'
        url = "https://www.jewelry.com/earrings"
        JewelryStore::Scraper.scrape_jewelry(url, "Earrings")
        list_earrings
        earring_choice
+       new_choice_menu
      when 'necklace', 'necklaces'
        url = "https://www.jewelry.com/necklaces"
        JewelryStore::Scraper.scrape_jewelry(url, "Necklaces")
        list_necklaces
        necklace_choice
+       new_choice_menu
      else 
        puts "I did not understand your input."
        shop_menu
@@ -76,7 +79,7 @@ class JewelryStore::CLI
    
   def ring_choice
     puts "Would you like more information?"
-    puts "Select a ring by entering its number."
+    puts "\nSelect a ring by entering its number."
       input = gets.strip.to_i 
       max_choice = JewelryStore::Jewelry_Piece.all_rings.length
       if input.between?(1, max_choice)
@@ -92,7 +95,7 @@ class JewelryStore::CLI
     
      def earring_choice
       puts "Would you like more information?"
-      puts "Select an earring by entering its number."
+      puts "\nSelect an earring by entering its number."
       input = gets.strip.to_i 
       max_choice = JewelryStore::Jewelry_Piece.all_earrings.length
       if input.between?(1, max_choice)
@@ -107,8 +110,8 @@ class JewelryStore::CLI
     end
     
     def necklace_choice
-    puts "Would you like more information?"
-    puts "Select a necklace by entering its number."
+    puts "\nWould you like more information?"
+    puts "\nSelect a necklace by entering its number."
       input = gets.strip.to_i 
       max_choice = JewelryStore::Jewelry_Piece.all_necklaces.length
       if input.between?(1, max_choice)
@@ -124,8 +127,23 @@ class JewelryStore::CLI
     
     def display_jewelry(jewelry_item)
       JewelryStore::Scraper.scrape_more_info(jewelry_item)
-      puts "Here is more information about your selection:"
+      puts "Here is more information about your selection:\n"
        puts jewelry_item.more_info 
        puts jewelry_item.price
+    end
+    
+    def new_choice_menu
+      puts "\nWould you like to see another piece?"
+      puts "Choose new Selection or Exit"
+      puts "Type 'S' or 'E'"
+      input = gets.strip.upcase
+        if input == 'S'
+          shop_menu
+        elsif == 'E'
+          puts "Goodbye!"
+        else 
+         puts "I did not understand your input."
+         new_choice_menu
+        end
     end
 end
