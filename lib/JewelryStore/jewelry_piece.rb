@@ -6,16 +6,17 @@ class JewelryStore::Jewelry_Piece
   @@all_necklaces=[]
   @@all_earrings=[]
   
-   def initialize(type)
+   def initialize(type, url)
      @type = type
      case type 
-     when "Earrings"
-       @@all_earrings << self
-     when "Necklaces"
-       @@all_necklaces << self 
-     when "Ring"
-       @@all_rings << self 
+       when "Earrings"
+         @@all_earrings << self
+       when "Necklaces"
+         @@all_necklaces << self 
+       when "Ring"
+         @@all_rings << self 
      end
+     @url = "https://www.jewelry.com" + url
    end
    
    def self.all_earrings
@@ -30,7 +31,4 @@ class JewelryStore::Jewelry_Piece
      @@all_rings
    end 
    
-   def save
-     @@all << self
-   end
 end

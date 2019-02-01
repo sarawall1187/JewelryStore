@@ -8,11 +8,12 @@ class JewelryStore::Scraper
   def self.scrape_jewelry(url, type)
     doc = Nokogiri::HTML(open(url))
     doc.css("div.pl-product-info").each.with_index(1) do |item, i|
-    jewelry_piece = JewelryStore::Jewelry_Piece.new(type)
+    jewelry_piece = JewelryStore::Jewelry_Piece.new(type, url)
     jewelry_piece.description = item.css("h5.pl-description").text
-  #   jewelry_piece.url = item.css("a").attr("href")
-  #   binding.pry
-  end
+    jewelry_piece.url = item.css("a").attr("href").value
+    jewelry_piece
+    # binding.pry
+    end
   end
   
   # def self.scrape_more_info(jewelry_piece)
