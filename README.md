@@ -1,8 +1,7 @@
 # JewelryStore
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/JewelryStore`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+Welcome to my Jewelry Store! 
+This Ruby Gem provides a CLI to view a list of available jewelry item based on chosen type i.e., necklace, earrings, or ring. The CLI will then return more information, including a description and price, of the selected jewelry item. 
 
 ## Installation
 
@@ -22,7 +21,9 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+Type below code into your terminal and follow the on screen prompts:
+
+ruby bin/JewelryStore
 
 ## Development
 

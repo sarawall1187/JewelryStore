@@ -19,6 +19,8 @@ class JewelryStore::Scraper
     doc = Nokogiri::HTML(open(jewelry_piece.url)) 
     jewelry_piece.price = doc.css("span#product-price").text.strip
     jewelry_piece.more_info = doc.css("div.product-desc").text.strip
+    # jewelry_piece.metal_type = doc.css("span.desc").text.strip
+    # binding.pry
   end
 
 end
