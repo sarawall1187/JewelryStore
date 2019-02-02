@@ -10,7 +10,7 @@ class JewelryStore::CLI
     elsif input == 'repair'
      repair
    else 
-     puts "I did not understand your input."
+     puts "\nI did not understand your input."
      start
    end
   end
@@ -47,12 +47,16 @@ class JewelryStore::CLI
    def repair
      t = DateTime.now
     puts "Our Jeweler is on site, we can have this ready in #{t + 7}"
-    puts "What else can I help you with? Choose 'shop' or 'repair'"
-    input = gets.strip 
-     if input == 'shop'
+    puts "What else can I help you with?"
+    puts "Shop, another Repair, or Exit?"
+    puts "Type 'S' or 'R', 'E'"
+    input = gets.strip.upcase 
+     if input == 'S'
       shop_menu
-      elsif input == 'repair'
+      elsif input == 'R'
       repair
+      elsif input == 'E'
+      puts "Goodbye!"
       else 
        puts "I did not understand your input."
        repair
@@ -134,13 +138,15 @@ class JewelryStore::CLI
     
     def new_choice_menu
       puts "\nWould you like to see another piece?"
-      puts "Choose new Selection or Exit"
-      puts "Type 'S' or 'E'"
+      puts "Choose new Selection, Repair, or Exit"
+      puts "Type 'S', 'R', or 'E'"
       input = gets.strip.upcase
         if input == 'S'
           shop_menu
-        elsif == 'E'
+        elsif input == 'E'
           puts "Goodbye!"
+          elsif input == 'R'
+          repair
         else 
          puts "I did not understand your input."
          new_choice_menu
