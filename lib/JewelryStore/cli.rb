@@ -3,13 +3,13 @@ class JewelryStore::CLI
  def start 
   diamond
   puts "Welcome to my Jewelry Store!"
-  puts "Are you shopping or in need of a repair?" 
-  puts "Choose 'shop' or 'repair'"
+  puts "Are you Shopping or in need of a Repair?" 
+  puts "Choose 'S' or 'R'"
   
-  input = gets.strip
-    if input == 'shop'
+  input = gets.strip.upcase
+    if input == 'S'
       shop_menu
-    elsif input == 'repair'
+    elsif input == 'R'
       repair
     else 
      puts "\nI did not understand your input."
@@ -20,22 +20,22 @@ class JewelryStore::CLI
   
  def shop_menu
   puts "Are you shopping for a ring, earrings, or necklace?"
-  puts "Choose 'ring', 'earrings', or 'necklace'"
-  input = gets.strip
+  puts "Choose 'R', 'E', or 'N'"
+  input = gets.strip.upcase
    case input
-     when 'ring', 'rings'
+     when 'R'
        url = "https://www.jewelry.com/rings"
        JewelryStore::Scraper.scrape_jewelry(url, "Ring")
        list_rings
        ring_choice
        new_choice_menu
-     when 'earrings', 'earring'
+     when 'E'
        url = "https://www.jewelry.com/earrings"
        JewelryStore::Scraper.scrape_jewelry(url, "Earrings")
        list_earrings
        earring_choice
        new_choice_menu
-     when 'necklace', 'necklaces'
+     when 'N'
        url = "https://www.jewelry.com/necklaces"
        JewelryStore::Scraper.scrape_jewelry(url, "Necklaces")
        list_necklaces
