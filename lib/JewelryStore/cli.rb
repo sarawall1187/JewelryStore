@@ -103,7 +103,7 @@ class JewelryStore::CLI
     
   def new_choice_menu
    puts "\nWould you like to see another piece?"
-   puts "Choose new Selection, Repair, or Exit"
+   puts "Choose Shop, Repair, or Exit"
    puts "Type 'S', 'R', or 'E'"
    input = gets.strip.upcase
    if input == 'S'
