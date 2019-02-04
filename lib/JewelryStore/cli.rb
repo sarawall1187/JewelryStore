@@ -25,21 +25,22 @@ class JewelryStore::CLI
    case input
      when 'R'
        url = "https://www.jewelry.com/rings"
+       #if all_rings.?(aal_ring)
        JewelryStore::Scraper.scrape_jewelry(url, "Ring")
-       list_rings
-       ring_choice
+       list_jewelry("rings")
+       jewelry_choice("rings")
        new_choice_menu
      when 'E'
        url = "https://www.jewelry.com/earrings"
        JewelryStore::Scraper.scrape_jewelry(url, "Earrings")
-       list_earrings
-       earring_choice
+       list_jewelry("earrings")
+       jewelry_choice("earrings")
        new_choice_menu
      when 'N'
        url = "https://www.jewelry.com/necklaces"
        JewelryStore::Scraper.scrape_jewelry(url, "Necklaces")
-       list_necklaces
-       necklace_choice
+       list_jewelry("necklaces")
+       jewelry_choice("necklaces")
        new_choice_menu
      else 
        puts "I did not understand your input."
@@ -66,72 +67,28 @@ class JewelryStore::CLI
      end
   end
    
-   def list_rings
-     JewelryStore::Jewelry_Piece.all_rings.each.with_index(1) do |type, i|
+   def list_jewelry(type)
+     JewelryStore::Jewelry_Piece.send("all_#{type}").each.with_index(1) do |type, i|
      puts "#{i}. #{type.description}"
     end
    end
    
- def list_earrings
-  JewelryStore::Jewelry_Piece.all_earrings.each.with_index(1) do |type, i|
-     puts "#{i}. #{type.description}"
-    end
-  end
-
- def list_necklaces
-  JewelryStore::Jewelry_Piece.all_necklaces.each.with_index(1) do |type, i|
-     puts "#{i}. #{type.description}"
-    end
-  end
-   
-  def ring_choice
+  def jewelry_choice(type)
    puts "Would you like more information?"
-   puts "\nSelect a ring by entering its number."
+   puts "\nSelect a piece by entering its number."
    input = gets.strip.to_i 
-   max_choice = JewelryStore::Jewelry_Piece.all_rings.length
+   max_choice = JewelryStore::Jewelry_Piece.send("all_#{type}").length
    
     if input.between?(1, max_choice)
-     ring_choice = JewelryStore::Jewelry_Piece.all_rings[input - 1]
-     JewelryStore::Scraper.scrape_more_info(ring_choice)
-     display_jewelry(ring_choice) 
+     choice = JewelryStore::Jewelry_Piece.send("all_#{type}")[input - 1]
+     JewelryStore::Scraper.scrape_more_info(choice)
+     display_jewelry(choice) 
     else
      puts "I did not understand your input."
-     list_rings
-     ring_choice
+     list_jewelry(type)
+     jewelry_choice(type)
     end
   end
-    
-     def earring_choice
-      puts "Would you like more information?"
-      puts "\nSelect an earring by entering its number."
-      input = gets.strip.to_i 
-      max_choice = JewelryStore::Jewelry_Piece.all_earrings.length
-      if input.between?(1, max_choice)
-        earring_choice = JewelryStore::Jewelry_Piece.all_earrings[input - 1]
-        JewelryStore::Scraper.scrape_more_info(earring_choice)
-        display_jewelry(earring_choice) 
-      else
-        puts "I did not understand your input."
-        list_earrings
-        earring_choice
-      end
-    end
-    
-    def necklace_choice
-    puts "\nWould you like more information?"
-    puts "\nSelect a necklace by entering its number."
-      input = gets.strip.to_i 
-      max_choice = JewelryStore::Jewelry_Piece.all_necklaces.length
-      if input.between?(1, max_choice)
-        necklace_choice = JewelryStore::Jewelry_Piece.all_necklaces[input - 1]
-        JewelryStore::Scraper.scrape_more_info(necklace_choice)
-        display_jewelry(necklace_choice) 
-      else
-        puts "I did not understand your input."
-        list_necklaces
-        necklace_choice
-      end
-    end
     
     def display_jewelry(jewelry_item)
       JewelryStore::Scraper.scrape_more_info(jewelry_item)
