@@ -1,8 +1,3 @@
-#https://www.jewelry.com/ -site to be scraped
-#Scrape rings, earrings, necklaces
-#each category has div.pl-designer-name, h5.pl-description, p span.smaller-price
-#second level scrape will return "the about this product" block
-
 class JewelryStore::Scraper
   
   def self.scrape_jewelry(url, type)
@@ -12,8 +7,8 @@ class JewelryStore::Scraper
     jewelry_piece = JewelryStore::Jewelry_Piece.new(type)
     jewelry_piece.description = item.css("h5.pl-description").text
     jewelry_piece.url = "https://www.jewelry.com" + item.css("a").attr("href").value
+   
     jewelry_piece
-    binding.pry
     end
   end
   
@@ -21,8 +16,6 @@ class JewelryStore::Scraper
     doc = Nokogiri::HTML(open(jewelry_piece.url)) 
     jewelry_piece.price = doc.css("span#product-price").text.strip
     jewelry_piece.more_info = doc.css("div.product-desc").text.strip
-    # jewelry_piece.metal_type = doc.css("span.desc").text.strip
-    # binding.pry
   end
 
 end

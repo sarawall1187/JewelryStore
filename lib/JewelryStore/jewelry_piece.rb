@@ -2,7 +2,6 @@ class JewelryStore::Jewelry_Piece
   
   attr_accessor :type, :description, :url, :price, :more_info
   
-  
   @@all_rings=[]
   @@all_necklaces=[]
   @@all_earrings=[]

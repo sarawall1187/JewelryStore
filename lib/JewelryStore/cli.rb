@@ -15,30 +15,34 @@ class JewelryStore::CLI
      puts "\nI did not understand your input."
       start
     end
-    
- end
+  end
   
- def shop_menu
-  puts "Are you shopping for a ring, earrings, or necklace?"
-  puts "Choose 'R', 'E', or 'N'"
-  input = gets.strip.upcase
+  def shop_menu
+   puts "Are you shopping for a ring, earrings, or necklace?"
+   puts "Choose 'R', 'E', or 'N'"
+   input = gets.strip.upcase
    case input
      when 'R'
        url = "https://www.jewelry.com/rings"
-       #if all_rings.?(aal_ring)
-       JewelryStore::Scraper.scrape_jewelry(url, "Ring")
+       if JewelryStore::Jewelry_Piece.all_rings == []
+        JewelryStore::Scraper.scrape_jewelry(url, "Ring")
+       end
        list_jewelry("rings")
        jewelry_choice("rings")
        new_choice_menu
      when 'E'
        url = "https://www.jewelry.com/earrings"
-       JewelryStore::Scraper.scrape_jewelry(url, "Earrings")
+       if JewelryStore::Jewelry_Piece.all_earrings == []
+        JewelryStore::Scraper.scrape_jewelry(url, "Earrings")
+       end
        list_jewelry("earrings")
        jewelry_choice("earrings")
        new_choice_menu
      when 'N'
        url = "https://www.jewelry.com/necklaces"
-       JewelryStore::Scraper.scrape_jewelry(url, "Necklaces")
+       if JewelryStore::Jewelry_Piece.all_necklaces == []
+        JewelryStore::Scraper.scrape_jewelry(url, "Necklaces")
+       end
        list_jewelry("necklaces")
        jewelry_choice("necklaces")
        new_choice_menu
@@ -68,8 +72,8 @@ class JewelryStore::CLI
   end
    
    def list_jewelry(type)
-     JewelryStore::Jewelry_Piece.send("all_#{type}").each.with_index(1) do |type, i|
-     puts "#{i}. #{type.description}"
+     JewelryStore::Jewelry_Piece.send("all_#{type}").each.with_index(1) do |type, i| 
+       puts "#{i}. #{type.description}"
     end
    end
    
@@ -93,15 +97,15 @@ class JewelryStore::CLI
     def display_jewelry(jewelry_item)
       JewelryStore::Scraper.scrape_more_info(jewelry_item)
       puts "Here is more information about your selection:\n"
-       puts jewelry_item.more_info 
-       puts jewelry_item.price
+      puts jewelry_item.more_info 
+      puts jewelry_item.price
     end
     
- def new_choice_menu
-  puts "\nWould you like to see another piece?"
-  puts "Choose new Selection, Repair, or Exit"
-  puts "Type 'S', 'R', or 'E'"
-  input = gets.strip.upcase
+  def new_choice_menu
+   puts "\nWould you like to see another piece?"
+   puts "Choose new Selection, Repair, or Exit"
+   puts "Type 'S', 'R', or 'E'"
+   input = gets.strip.upcase
    if input == 'S'
      shop_menu
    elsif input == 'E'
